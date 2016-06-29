@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/WEB-INF/templates/simple.xhtml">
+    <ui:define name="title">
+        #{bundle['application.loginpage.title']}
+    </ui:define>
+    <ui:define name="content">
+        <div class="panel">
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value='Enter first name'/>
+                    <h:inputText name="firstName" id="firstName" value='#{personController.firstName}'/>
+                    <h:outputText value='Enter last name'/>
+                    <h:inputText name="lastName" id="lastName" value='#{personController.lastName}'/>
+                    <h:commandButton action="#{personController.find}" value="Find"/>
+                    <h:commandButton action="#{personController.createNewUser}" value="Create acount"/>
+                </h:panelGrid>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+</html>

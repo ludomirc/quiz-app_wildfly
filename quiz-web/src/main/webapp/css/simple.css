@@ -1,0 +1,61 @@
+h1, p, body, html {
+    margin: 0;
+    padding: 0;
+}
+a {
+    text-decoration: none;
+    padding: 1px;
+}
+
+body {
+    padding: 5px 5px 5px;
+}
+
+.pindex{
+    width:  600px;
+    text-align: center;
+}
+
+.panel {
+    border: #c1cbff solid 1px;
+    padding: 5px 5px 5px;
+    width: 287px;
+    margin: 5px;
+}
+.question{
+    line-height: 1.4em;
+    height: 200px;
+    width:  600px;
+}
+#container {
+    width: 100%;
+}
+
+#header {
+    text-align: center;
+    font-weight: bold;
+
+}
+
+#header h1 {
+    margin-bottom: 0px;
+    padding: 10px;
+}
+
+#content {
+    float: left;
+    width: 70%;
+    margin-left: 15%;
+    border: solid black 1px;
+}
+
+#footer {
+    clear: both; /*No floating elements are allowed on left or right*/
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.errorMessage {
+    color: red;
+}

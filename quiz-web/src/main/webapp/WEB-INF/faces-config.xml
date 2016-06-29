@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+    http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+    <application>
+        <resource-bundle>
+            <base-name>org.qbit.quiz.web.messages</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+    </application>
+
+    <!-- found personForm -->
+    <navigation-rule>
+        <from-view-id>/pages/person.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/pages/profile.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>createNew</from-outcome>
+            <to-view-id>/pages/profile.xhtml</to-view-id>
+        </navigation-case>
+        <!-- not found personForm-->
+        <navigation-case>
+            <from-outcome>back</from-outcome>
+            <to-view-id>/pages/person.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <!-- if not found any value-->
+    <navigation-rule>
+        <from-view-id>/pages/quiz.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>back</from-outcome>
+            <to-view-id>/pages/person.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>profile</from-outcome>
+            <to-view-id>/pages/profile.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <!-- profile navigation rule-->
+    <navigation-rule>
+        <from-view-id>/pages/profile.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>updateSuccess</from-outcome>
+            <to-view-id>/pages/profile.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>

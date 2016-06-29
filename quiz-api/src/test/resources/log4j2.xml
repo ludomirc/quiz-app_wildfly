@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%c{10} %d %highlight{%p} %style{%C{1.} [%t] %m}{bold}%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+        <Logger name="org.apache.log4j.xml" level="INFO"/>
+
+        <Logger name="org.hibernate" level="INFO"/>
+        <Logger name="org.hibernate.sql" level="INFO"/>
+        <Logger name="org.hibernate.jdbc" level="INFO"/>
+    </Loggers>
+</Configuration>

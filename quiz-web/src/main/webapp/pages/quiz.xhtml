@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/simple.xhtml">
+    <ui:define name="title">
+        #{bundle['application.loginpage.title']}
+    </ui:define>
+    <ui:define name="content">
+        <h:form id="form" prependId="false">
+
+            <!-- question panel -->
+            <div style="width: 640px">
+                <div>
+                    <div class="panel" style="width: 600px; height: 100px">
+                        Question:<br/>
+                        <h:outputText value="#{quizController.questionPanel.question}"/>
+                    </div>
+                    <!-- ansver variant panel-->
+                    <div class="panel question">
+                        <table>
+                            <colgroup>
+                                <col style="width: 40px; vertical-align: 3px;"/>
+                                <col style="width: 550px;"/>
+                            </colgroup>
+                            <tr>
+                                <td>A -</td>
+                                <td><h:outputText value="#{quizController.questionPanel.a}"/></td>
+                            </tr>
+                            <tr>
+                                <td>B -</td>
+                                <td><h:outputText value="#{quizController.questionPanel.b}"/></td>
+                            </tr>
+                            <tr>
+                                <td>C -</td>
+                                <td><h:outputText value="#{quizController.questionPanel.c}"/></td>
+                            </tr>
+                            <tr>
+                                <td>D -</td>
+                                <td><h:outputText value="#{quizController.questionPanel.d}"/></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- selected anwer variant panel-->
+            <div class="panel" style="width: 600px;">
+                <h:selectManyCheckbox value="#{quizController.answerPanel.data}" style="margin: auto">
+                    <f:selectItem itemValue="A" itemLabel="A"/>
+                    <f:selectItem itemValue="B" itemLabel="B"/>
+                    <f:selectItem itemValue="C" itemLabel="C"/>
+                    <f:selectItem itemValue="D" itemLabel="D"/>
+                </h:selectManyCheckbox>
+                <h:commandButton value="Submit" action="#{quizController.answer}"/>
+            </div>
+
+            <!-- page number panel-->
+            <div class="pindex"><h:outputText
+                    value="Page #{quizController.currentPage} / #{quizController.totalPages}"/>
+            </div>
+
+
+            <!--The paging links -->
+            <div style="padding-left: 5px; padding-bottom: 5px;">
+                <ui:repeat value="#{quizController.pages}" var="page">
+                    <h:commandLink value="#{page}" actionListener="#{quizController.page}"
+                                   rendered="#{page != quizController.currentPage}"/>
+                    <h:outputText value="#{page}" escape="false" rendered="#{page == quizController.currentPage}"/>
+                </ui:repeat>
+            </div>
+
+            <!-- The paging buttons -->
+            <div style="padding-left: 5px; padding-bottom: 5px;">
+                <h:commandButton value="first" action="#{quizController.pageFirst}"
+                                 disabled="#{quizController.currentPage == 1}"/>
+                <h:commandButton value="prev" action="#{quizController.pagePrevious}"
+                                 disabled="#{quizController.currentPage == 1}"/>
+                <h:commandButton value="next" action="#{quizController.pageNext}"
+                                 disabled="#{quizController.currentPage >= quizController.totalPages}"/>
+                <h:commandButton value="last" action="#{quizController.pageLast}"
+                                 disabled="#{quizController.currentPage >= quizController.totalPages}"/>
+
+            </div>
+
+
+        </h:form>
+
+        <!-- back to personForm page-->
+        <div style="padding-left: 5px; padding-bottom: 5px;">
+            <h:form>
+                <h:commandLink action="back">
+                    <h:outputText value="Home"/>
+                </h:commandLink>
+                <h:commandLink action="profile">
+                    <h:outputText value="Go to profile"/>
+                </h:commandLink>
+            </h:form>
+        </div>
+
+    </ui:define>
+</ui:composition>
+</html>
