@@ -50,11 +50,16 @@
                                 <f:facet name="header">Finish date</f:facet>
                                 #{quiz.finishDate}
                             </h:column>
-
+                            <h:column>
+                                <f:facet name="header">Status</f:facet>
+                                <h:outputText value="Waiting to start" rendered="#{quiz.startDate eq null and quiz.finishDate eq null}"/>
+                                <h:outputText value="In progres" rendered="#{quiz.startDate ne null and quiz.finishDate eq null}"/>
+                                <h:outputText value="Finished" rendered="#{quiz.startDate ne null and quiz.finishDate ne null}"/>
+                            </h:column>
                             <h:column>
                                 <f:facet name="header">Go to Quiz</f:facet>
                                 <h:form>
-                                    <h:commandButton value="Go to quiz" action="#{quizController.doQuiz}">
+                                    <h:commandButton value="Go" action="#{quizController.doQuiz}">
                                         <f:setPropertyActionListener value="#{quiz.id}" target="#{quizController.quizId}"/>
                                     </h:commandButton>
                                 </h:form>
