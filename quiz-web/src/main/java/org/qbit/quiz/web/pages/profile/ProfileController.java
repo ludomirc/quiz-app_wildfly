@@ -27,7 +27,7 @@ import java.util.List;
 @RequestScoped
 public class ProfileController implements Serializable {
 
-    private Logger logger = LogManager.getLogger(ProfileController.class);
+    final private Logger logger = LogManager.getLogger(ProfileController.class);
 
     @EJB(mappedName = "java:global/quiz-web/PersonBean")
     private PersonService personService;
@@ -78,10 +78,6 @@ public class ProfileController implements Serializable {
     }
 
     //getters ---------------------------------------------------------
-    public PersonForm getPersonForm() {
-        return personForm;
-    }
-
     public String getLastName() {
         if (StringUtils.isEmpty(lastName)) {
             loadPerson();
@@ -103,10 +99,6 @@ public class ProfileController implements Serializable {
     }
 
     //seders ---------------------------------------------------------
-    public void setPersonForm(PersonForm personForm) {
-        this.personForm = personForm;
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
