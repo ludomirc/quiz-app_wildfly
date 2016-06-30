@@ -12,12 +12,15 @@ import org.qbit.quiz.web.util.StringUtils;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.model.ArrayDataModel;
+import javax.faces.model.DataModel;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
 /**
+ *
  * Created by beniamin.czaplicki on 2016-06-17.
  */
 @Named
@@ -38,8 +41,9 @@ public class ProfileController implements Serializable {
     private String firstName;
     private String lastName;
 
-    private List<Quiz> quizList;
+    private DataModel<Quiz> quizList;
 
+    // private DataModel<Quiz> person;
     public ProfileController() {
     }
 
@@ -62,7 +66,9 @@ public class ProfileController implements Serializable {
         if (quizList == null) {
             Person idPerson = new Person();
             idPerson.setId(personForm.getId());
-            quizList = quizBean.findByPerson(idPerson);
+            List<Quiz> result = quizBean.findByPerson(idPerson);
+            Quiz[] quizArr = result != null ? result.toArray(new Quiz[0]) : new Quiz[0];
+            quizList = new ArrayDataModel(quizArr);
         }
     }
 
@@ -91,7 +97,7 @@ public class ProfileController implements Serializable {
     }
 
     @Log
-    public List<Quiz> getQuizList() {
+    public DataModel<Quiz> getQuizList() {
         if (quizList == null) loadQuizList();
         return quizList;
     }
@@ -109,7 +115,7 @@ public class ProfileController implements Serializable {
         this.lastName = lastName;
     }
 
-    public void setQuizList(List<Quiz> quizList) {
+    public void setQuizList(DataModel<Quiz> quizList) {
         this.quizList = quizList;
     }
 }

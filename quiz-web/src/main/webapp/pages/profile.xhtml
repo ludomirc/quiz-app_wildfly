@@ -28,10 +28,10 @@
                 <div>
                     <!-- ansver variant panel-->
                     <div class="panel" style="width: auto">
-                        <h:dataTable value="#{profileController.quizList}" var="quiz" rowIndexVar="index">
+                        <h:dataTable value="#{profileController.quizList}" var="quiz">
                             <h:column>
                                 <f:facet name="header">No</f:facet>
-                                #{index + 1}
+                                #{profileController.quizList.rowIndex + 1}
                             </h:column>
                             <h:column>
                                 <!-- column header -->
