@@ -68,7 +68,7 @@ public class ProfileController implements Serializable {
             idPerson.setId(personForm.getId());
             List<Quiz> result = quizBean.findByPerson(idPerson);
             Quiz[] quizArr = result != null ? result.toArray(new Quiz[0]) : new Quiz[0];
-            quizList = new ArrayDataModel(quizArr);
+            quizList = new ArrayDataModel<>(quizArr);
         }
     }
 
