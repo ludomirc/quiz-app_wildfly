@@ -21,6 +21,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 /**
  * Created by beniamin.czaplicki on 2016-06-02.
@@ -30,6 +31,9 @@ import java.io.Serializable;
 public class QuizController implements Serializable {
 
     private Logger logger = LogManager.getLogger(QuizController.class);
+
+    private static final int FIRST_PAGE = 1;
+
 
     @EJB(mappedName = "java:global/quiz-web/QuizBean")
     private QuizService quizService;
@@ -65,7 +69,16 @@ public class QuizController implements Serializable {
 
     public String doQuiz() {
         quiz = null;
-        loadData(1);
+        Quiz quizById = new Quiz();
+        quizById.setId(quizId);
+        Quiz result = quizService.findById(quizById);
+        if (result != null) {
+            if (result.getStartDate() == null) {
+                result.setStartDate(new Date(new java.util.Date().getTime()));
+                quizService.update(result);
+            }
+        }
+        loadData(FIRST_PAGE);
         return "quiz";
     }
 
@@ -134,7 +147,7 @@ public class QuizController implements Serializable {
         if (quiz == null) loadQuiz();
 
         Answer answerModel = answerService.findByAnswerOrderId(currentPage, quiz);
-       int pagesPerQuiz = (int) answerService.pagesPerQuiz(quiz);
+        int pagesPerQuiz = (int) answerService.pagesPerQuiz(quiz);
 
         String uAnswer = answerModel.getResponse();
         boolean isUAnswer = uAnswer != null && uAnswer.length() > 0;
